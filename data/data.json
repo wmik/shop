@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Designing an authentic user experience",
+      "text": "Lorem ipsum dolor...",
+      "image_url": "images/blog"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Product Name",
+      "price": 0.00,
+      "image_url": "images/products/1.png"
+    }
+  ]
+}
