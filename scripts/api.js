@@ -25,7 +25,7 @@ function fetchTree(tree_sha, recursive) {
 
 function fetchBlob(file_sha) {
   const config = Object.assign(repoConfig, { file_sha });
-  return octokit.gitdata.getBlob(config).then(blob => blob.content);
+  return octokit.gitdata.getBlob(config).then(result => result.data.content);
 }
 
 if (!localStorage.getItem(IMAGES_CACHE_KEY)) {
