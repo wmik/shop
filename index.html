@@ -6,6 +6,9 @@
   <title>Ecommerce</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+  <script src="scripts/vendor/octokit-rest.min.js"></script>
+  <script src="scripts/util.js"></script>
+  <script src="scripts/api.js"></script>
 </head>
 <body>
   <header class="page-header">
@@ -41,65 +44,20 @@
     </header>
     <section class="tile-group">
       <h2>Today's Deals</h2>
-      <section class="products">
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p1.png" alt="product_name_#1" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p2.png" alt="product_name_#2" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p3.png" alt="product_name_#2" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p4.png" alt="product_name_#2" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p5.png" alt="product_name_#2" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-image">
-            <img src="images/products/p6.png" alt="product_name_#2" />
-          </div>
-          <div class="product-info">
-            <h5>Product Name</h5>
-            <h6>0.00</h6>
-          </div>
-        </div>
-      </section>
+      <section class="products"></section>
     </section>
   </main>
   <footer class="page-footer"></footer>
   <script src="scripts/main.js"></script>
 </body>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(function(registration) {
+        console.log("Registration successful. Scope", registration.scope);
+      }).catch(function(error) {
+        console.log("ERROR:", error.message);
+      });
+  }
+</script>
 </html>
