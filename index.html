@@ -19,7 +19,7 @@
     <nav class="top-nav">
       <ul class="nav-container">
         <li class="nav-item">
-          <a href="/">Home</a>
+          <a href="index.html">Home</a>
         </li>
         <li class="nav-item">
           <a href="service.html">Service</a>
@@ -52,7 +52,7 @@
 </body>
 <script>
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js")
+    navigator.serviceWorker.register("/shop/service-worker.js")
       .then(function(registration) {
         console.log("Registration successful. Scope", registration.scope);
       }).catch(function(error) {
