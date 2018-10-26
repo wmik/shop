@@ -36,9 +36,15 @@
 			</div>
 		`;
     const products = document.getElementsByClassName("products");
-    const imageCache = JSON.parse(localStorage.getItem(SHOP_IMAGES_CACHE_KEY));
+    makeAPIRequest().then(() => {
+      const imageCache = JSON.parse(
+        localStorage.getItem(SHOP_IMAGES_CACHE_KEY)
+      );
 
-    if (Array.isArray(imageCache.data) && imageCache.data.length > 0) {
+      if (!imageCache) {
+        return makeAPIRequest().then(loadProducts(retry + 1));
+      }
+
       imageCache.data
         .filter(image => image.path.startsWith("products/"))
         .forEach((image, index) => {
@@ -52,9 +58,6 @@
             );
           });
         });
-      return;
-    }
-    makeAPIRequest();
-    loadProducts(retry + 1);
+    });
   }
 })();
