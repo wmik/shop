@@ -1,6 +1,7 @@
 (function() {
   carousel(0);
   loadProducts();
+
   function carousel(imageIndex) {
     const images = document.getElementsByClassName("slider_image");
     const totalImages = images.length;
@@ -19,7 +20,10 @@
     }, delay);
   }
 
-  function loadProducts() {
+  function loadProducts(retry = 0) {
+    if (retry > 3) {
+      return;
+    }
     const html = data => `
 			<div class="product-card">
 				<div class="product-image">
@@ -32,19 +36,25 @@
 			</div>
 		`;
     const products = document.getElementsByClassName("products");
-    const imageData = JSON.parse(localStorage.getItem(IMAGES_CACHE_KEY)).data;
-    imageData
-      .filter(image => image.path.startsWith("products/"))
-      .forEach((image, index) => {
-        fetchBlob(image.sha).then(content => {
-          const img = document.createElement("img");
-          img.src = `data:image/png;base64, ${content}`;
-          img.alt = `product_name_#${index}`;
-          products[0].insertAdjacentHTML(
-            "beforeend",
-            html({ img: img.outerHTML })
-          );
+    const imageCache = JSON.parse(localStorage.getItem(SHOP_IMAGES_CACHE_KEY));
+
+    if (Array.isArray(imageCache.data) && imageCache.data.length > 0) {
+      imageCache.data
+        .filter(image => image.path.startsWith("products/"))
+        .forEach((image, index) => {
+          fetchBlob(image.sha).then(content => {
+            const img = document.createElement("img");
+            img.src = `data:image/png;base64, ${content}`;
+            img.alt = `product_name_#${index}`;
+            products[0].insertAdjacentHTML(
+              "beforeend",
+              html({ img: img.outerHTML })
+            );
+          });
         });
-      });
+      return;
+    }
+    makeAPIRequest();
+    loadProducts(retry + 1);
   }
 })();
