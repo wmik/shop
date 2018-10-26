@@ -30,7 +30,7 @@ function fetchBlob(file_sha) {
 
 function makeAPIRequest() {
   if (!localStorage.getItem(SHOP_IMAGES_CACHE_KEY)) {
-    fetchLatestCommitSHA()
+    return fetchLatestCommitSHA()
       .then(sha => fetchTree(sha))
       .then(rootTree => rootTree.find(node => node.path === "images"))
       .then(imageTree => fetchTree(imageTree.sha, 1))
@@ -46,4 +46,5 @@ function makeAPIRequest() {
         )
       );
   }
+  return Promise.resolve();
 }
