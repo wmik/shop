@@ -4,13 +4,14 @@ self.addEventListener("install", function(event) {
       .open("v1")
       .then(function(cache) {
         return cache.addAll([
-          "/",
-          "/product.html",
-          "/blog.html",
-          "/service.html",
-          "/scripts/util.js",
-          "/scripts/main.js",
-          "/styles/style.css"
+          "/shop/",
+          "/shop/index.html",
+          "/shop/product.html",
+          "/shop/blog.html",
+          "/shop/service.html",
+          "/shop/scripts/util.js",
+          "/shop/scripts/main.js",
+          "/shop/styles/style.css"
         ]);
       })
       .catch(function(error) {
